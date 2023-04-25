@@ -1,0 +1,73 @@
+POPA STEFANIA, 315CD
+--> Am alocat dinamic toti vectorii si toate matricele din program, cu ajutorul functiilor "malloc" si "calloc".
+--> Cand nu am mai avut nevoie de un vector sau de o matrice, am eliberat memoria folosind functia "free".
+--> Task-urile 1, 2, 3 si 7 returneaza rezultatele sub forma unui sir de caractere. Pentru aceasta, am folosit
+    functia "sprintf" si uneori (task 1 si task 3) un buffer cu ajutorul caruia am concatenat siruri de caractere
+    pentru obtinerea rezultatului final.
+
+Task 1
+    Pentru generarea matricei n x n rotite la dreapta am observat urmatoarea regula:
+        matrix[linie][coloana] = (n - coloana) * (10 ^ (nr_de_cifre (linie + 1))) + linie + 1
+    Pentru a putea atribui fiecarui element din matrice valoarea corespunzatoare, am creat functia "nr_digits",
+    care calculeaza numarul de cifre al unui numar dat, si functia "ten_power", care returneaza 10^(numar dat).
+    In final, am asezat matricea pe linii si coloane intr-un sir de caractere si am returnat rezultatul.
+
+Task 2
+    La acest task, numerele din sirul de caractere sunt delimitate prin caracterul "_". Delimitez caracterele ce 
+    reprezinta numere, folosind functia "strtok" si le transform in numere folosind functia "atoi". Calculez suma
+    acestora, iar rezultatul va fi returnat sub forma unui sir de caractere. Pentru acest sir de caractere am 
+    atribuit memorie pentru ( nr_de_cifre(suma) + 2 ), 2-ul provenind de la posibiliatatea ca suma sa fie un
+    numar negativ si de la caracterul "NULL" de la finalul sirului.
+
+Task 3
+    Elementul de pe pozitia 0 a vectorului dat reprezinta numarul de elemente ale vectorului, numaratoarea pornid 
+    de la pozitia 1.
+    Daca vectorul are numar par de elemente, am inversat elementele din interiorul perechilor de pe pozitii de forma
+    (2 * k + 1, 2 * k + 2), cu k >= 0 cu ajutorul metodei paharelor.
+    Daca vectorul are numar impar de elemente, am inversat elementele din interiorul perechilor de pe pozitii de forma
+    (k, nr_de_el + 1 - k), cu k >= 1 cu ajutorul metodei paharelor.
+    Am pus elementele vectorului intr-un sir de caractere si am returnat rezultatul.
+
+Task 4
+    Am alocat memorie pentru structurile Player si Game si pentru campurile lor, mai putin pentru cele despre care
+    nu aveam suficiente informatii. 
+
+Task 5
+    Citim datele din fisier folosind functia "fscanf".
+    In functia ReadGame, apelam functia ReadPlayer pentru fiecare jucator, inclusiv pentru impostor, pentru a citi 
+    datele acestora.
+    In functia ReadPlayer, atribuim rolul fiecarui jucator folosind functia "strcmp", ce ne ajuta sa verificam daca 
+    2 siruri de caractere sunt identice. La sfarsit atribuim jucatorului abilitatea corespunzatoare rolului sau.
+
+Task 6
+    Scriem datele in fisier folosind functia "fprintf".
+    In functia WriteGame, apelam functia WritePlayer pentru fiecare jucator, inclusiv pentru impostor, pentru a scrie 
+    datele acestora.
+
+Task 7
+    Cu ajutorul distantei Manhattan, calculam distanta dintre impostor si fiecare jucator care inca mai este in viata
+    si o retinem pe cea minima, dar si pozitia in vectorul "crewmates" a jucatorului corespunzator distantei minime.
+    Daca nicio distanta nu a fost mai mica sau egala decat killRange, afisam un mesaj corespunzator.
+    In caz contrar, marcam jucatorul respectiv ca fiind mort, prin atribuirea valorii 0 campului "alive" si afisam 
+    mesajul corespunzator.
+    ---Legenda:
+                distkp---variabila in care vom retine cea mai mica distanta dintre impostor si jucatori
+                index---pozitia in vectorul de colegi de echipaj a jucatorului omorat
+                dist---variabila in care vom calcula distanta dintre impostor si fiecare coleg de echipaj
+
+Task 8
+    In fiecare ciclu de joc, verificam pentru fiecare jucator daca mai este in viata sau nu.
+    Daca un jucator este mort, afisam un mesaj corespunzator.
+    Daca un jucator traieste, se deplaseaza la urmatoarea locatie din vectorul de locatii. Daca se afla deja la ultima 
+    locatie din vector, atunci se intoarce la prima locatie din acesta. Afisam noua locatie a acestuia. Fiecare 
+    jucator face task-ul corespunzator rolului sau. Afisam rezultatul task-ului fiecarui jucator. Pentru a nu ramane  
+    memorie neeliberata, vom retine rezultatul task-ului fiecarui jucator intr-o variabila, iar dupa afisare, vom 
+    elibera memoria ocupata de variabila respectiva. 
+    La sfarsit, procedam in mod similar cu impostorul, acesta deplasandu-se la urmatoarea sa locatie si facandu-si task-ul
+    (KillPlayer), pentru care vom avea grija sa eliberam din nou memoria folosita.
+
+Task 9
+    Eliberam memoria alocata structurilor si campurilor acestora.
+    Functia FreeGame va apela functia FreePlayer pentru fiecare jucator, inclusiv pentru impostor.
+    Restul memoriei care a fost alocata pe parcurs a fost eliberata in momentul in care nu am mai avut nevoie de ea.
+    
